@@ -26,7 +26,7 @@ export const EXTENDED_DISCRETE_COLOR_RANGE = [
 ];
 
 const LABEL_STYLE = {
-  fontSize: '8px',
+  fontSize: '12px',
   textAnchor: 'middle'
 };
 
@@ -82,11 +82,9 @@ export default class BarGraph extends React.Component {
   render() {
     const {clicked, data, finalValue, pathValue} = this.state;
     return (
-      <div className="basic-sunburst-example-wrapper">
-        <div>
-          {clicked ? 'click to unlock selection' : 'click to lock selection'}
-        </div>
+      <div className="basic-sunburst-example-wrapper mt-3 d-flex justify-content-center">
         <Sunburst
+          showLabel="true"
           animation
           className="basic-sunburst-example"
           hideRootNode
@@ -123,9 +121,10 @@ export default class BarGraph extends React.Component {
           colorType="literal"
           getSize={d => d.value}
           getColor={d => d.hex}
+          // getLabel={d => d.name}
           data={data}
-          height={600}
-          width={600}
+          height={500}
+          width={500}
         >
           {finalValue && (
             <LabelSeries
@@ -133,7 +132,7 @@ export default class BarGraph extends React.Component {
             />
           )}
         </Sunburst>
-        <div className="basic-sunburst-example-path-name">{pathValue}</div>
+        
       </div>
     );
   }

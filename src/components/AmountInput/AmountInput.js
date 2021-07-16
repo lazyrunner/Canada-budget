@@ -18,7 +18,7 @@ export default function AmountInput() {
                             <Row className="pt-2">
                                 <InputGroup size="lg">
                                     <InputGroup.Text id="inputGroup-sizing-lg">%</InputGroup.Text>
-                                    <FormControl type="number" aria-label="Large" placeholder="Rate" />
+                                    <FormControl type="number" aria-label="Large" placeholder="Tax Rate" />
                                 </InputGroup>
                             </Row>
                             <ProgressBar className="mt-3">
@@ -46,26 +46,39 @@ export default function AmountInput() {
             </Col>
             <Col>
                 <Card border="dark" bg="secondary" text="white" >
-                    <Card.Header >Monthly Rate</Card.Header>
+                    <Card.Header >Hourly Rate</Card.Header>
                     <Card.Body>
                         <Card.Text>
                             <Row>
                                 <InputGroup size="lg">
                                     <InputGroup.Text id="inputGroup-sizing-lg">$</InputGroup.Text>
-                                    <FormControl type="number" aria-label="Large" placeholder="Monthly amount" />
+                                    <FormControl type="number" aria-label="Large" placeholder="Hourly amount" />
                                 </InputGroup>
                             </Row>
                             <Row className="pt-2">
-                                <InputGroup size="lg">
-                                    <InputGroup.Text id="inputGroup-sizing-lg">%</InputGroup.Text>
-                                    <FormControl type="number" aria-label="Large" placeholder="Rate" />
-                                </InputGroup>
+                                <Col>
+                                    <InputGroup size="lg">
+                                        <InputGroup.Text id="inputGroup-sizing-lg">%</InputGroup.Text>
+                                        <FormControl type="number" aria-label="Large" placeholder="Tax Rate" />
+                                    </InputGroup>
+                                </Col>
+                                <Col>
+                                    <InputGroup size="lg">
+                                        <InputGroup.Text id="inputGroup-sizing-lg">Days</InputGroup.Text>
+                                        <FormControl type="number" aria-label="Large" placeholder="Number of working days" />
+                                    </InputGroup>
+                                </Col>
+
                             </Row>
+                            <ProgressBar className="mt-3">
+                                <ProgressBar variant="warning" now={25} key={2} label="25" />
+                                <ProgressBar variant="success" now={75} key={1} label="75" />
+                            </ProgressBar>
                             <Row className="pt-3">
-                                <Col sm={3}></Col>
+                                <Col sm={3}>Before Tax</Col>
+                                <Col sm={3} className="float-right">$ 250</Col>
                                 <Col sm={3}>Tax</Col>
                                 <Col sm={3} className="float-right">$ 250</Col>
-                                <Col sm={3}></Col>
                             </Row>
                             <Row className="pt-1">
                                 <Col sm={3}></Col>

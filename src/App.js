@@ -1,9 +1,10 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav'
-import './App.css';
+import './App.scss';
 import BarGraph from './components/charts/BarGraph/BarGraph';
 import AmountInput from './components/AmountInput/AmountInput';
+import Table from './components/Table/Table';
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
           <AmountInput />
         </Row>
       <Row>
-        <Col><BarGraph /></Col>
+        <Col lg={6} ><Table /></Col>
+        <Col lg={6} ><BarGraph /></Col>
       </Row>
     </Container>
   );
