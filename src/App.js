@@ -6,13 +6,14 @@ import BarGraph from './components/charts/BarGraph/BarGraph';
 import AmountInput from './components/AmountInput/AmountInput';
 import Table from './components/Table/Table';
 
+
 function App() {
   return (
     <Container fluid>
       <Row>
         <Navbar bg="dark" variant="dark">
           <Container fluid>
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+            <Navbar.Brand href="#home">Monthly Planner</Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#features">Features</Nav.Link>
@@ -22,8 +23,8 @@ function App() {
         </Navbar>
       </Row>
       <Row>
-          <AmountInput />
-        </Row>
+        <AmountInput />
+      </Row>
       <Row>
         <Col lg={6} ><Table /></Col>
         <Col lg={6} ><BarGraph /></Col>

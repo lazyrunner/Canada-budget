@@ -105,5 +105,9 @@ export default {
     "style": {
         "fill": "#223F9A",
         "fillOpacity": 1
-    }
+    },
+    total:3875,
+    clicked: false,
+    parent:null,
+    child:null
 };

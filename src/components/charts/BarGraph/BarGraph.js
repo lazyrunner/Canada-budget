@@ -1,6 +1,11 @@
-import { Sunburst,LabelSeries } from 'react-vis';
+import { Sunburst, LabelSeries } from 'react-vis';
 import React from 'react';
-import decoratedData from './data';
+import { connect, } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from "../../../state/index"
+
+
+
 export const EXTENDED_DISCRETE_COLOR_RANGE = [
   '#19CDD7',
   '#DDB27C',
@@ -71,16 +76,18 @@ function updateData(data, keyPath) {
 }
 
 
-export default class BarGraph extends React.Component {
+class BarGraph extends React.Component {
+
   state = {
     pathValue: false,
-    data: decoratedData,
+    // data: decoratedData,
     finalValue: 'SUNBURST',
     clicked: false
   };
 
   render() {
-    const {clicked, data, finalValue, pathValue} = this.state;
+
+    const { clicked, finalValue, pathValue } = this.state;
     return (
       <div className="basic-sunburst-example-wrapper mt-3 d-flex justify-content-center">
         <Sunburst
@@ -97,22 +104,33 @@ export default class BarGraph extends React.Component {
               res[row] = true;
               return res;
             }, {});
+            this.props.updateHighlight(pathAsMap);
             this.setState({
               finalValue: path[path.length - 1],
               pathValue: path.join(' > '),
-              data: updateData(decoratedData, pathAsMap)
+              // data: updateData(decoratedData, pathAsMap)
             });
           }}
-          onValueMouseOut={() =>
-            clicked
-              ? () => {}
-              : this.setState({
-                  pathValue: false,
-                  finalValue: false,
-                  data: updateData(decoratedData, false)
-                })
-          }
-          onValueClick={() => this.setState({clicked: !clicked})}
+          onValueMouseOut={() => {
+            if (clicked) {
+              return;
+            }
+            this.props.updateHighlight(false);
+            this.setState({
+              pathValue: false,
+              finalValue: false,
+              // data: updateData(decoratedData, false)
+            });
+
+          }}
+          onValueClick={(node) => {
+            const path = getKeyPath(node).reverse();
+            this.props.updateClicked({
+              parent: path[1] || null,
+              child: path[2] || null
+            });
+            this.setState({ clicked: !clicked });
+          }}
           style={{
             stroke: '#ddd',
             strokeOpacity: 0.3,
@@ -122,18 +140,30 @@ export default class BarGraph extends React.Component {
           getSize={d => d.value}
           getColor={d => d.hex}
           // getLabel={d => d.name}
-          data={data}
+          data={this.props.monthlyExpense}
           height={500}
           width={500}
         >
           {finalValue && (
             <LabelSeries
-              data={[{x: 0, y: 0, label: finalValue, style: LABEL_STYLE}]}
+              data={[{ x: 0, y: 0, label: finalValue, style: LABEL_STYLE }]}
             />
           )}
         </Sunburst>
-        
+
       </div>
     );
   }
 }
+
+const mapStatetoProps = state => {
+  return {
+    monthlyExpense: state.monthlyExpense
+  };
+};
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ ...actionCreators }, dispatch)
+}
+
+export default connect(mapStatetoProps, mapDispatchToProps)(BarGraph)
