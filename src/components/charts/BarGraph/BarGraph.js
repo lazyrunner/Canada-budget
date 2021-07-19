@@ -50,31 +50,6 @@ function getKeyPath(node) {
   );
 }
 
-/**
- * Recursively modify data depending on whether or not each cell has been selected by the hover/highlight
- * @param {Object} data - the current node being considered
- * @param {Object|Boolean} keyPath - a map of keys that are in the highlight path
- * if this is false then all nodes are marked as selected
- * @returns {Object} Updated tree structure
- */
-function updateData(data, keyPath) {
-  if (data.children) {
-    data.children.map(child => updateData(child, keyPath));
-  }
-  // add a fill to all the uncolored cells
-  if (!data.hex) {
-    data.style = {
-      fill: EXTENDED_DISCRETE_COLOR_RANGE[5]
-    };
-  }
-  data.style = {
-    ...data.style,
-    fillOpacity: keyPath && !keyPath[data.name] ? 0.2 : 1
-  };
-
-  return data;
-}
-
 
 class BarGraph extends React.Component {
 
@@ -87,7 +62,7 @@ class BarGraph extends React.Component {
 
   render() {
 
-    const { clicked, finalValue, pathValue } = this.state;
+    const { clicked, finalValue } = this.state;
     return (
       <div className="basic-sunburst-example-wrapper mt-3 d-flex justify-content-center">
         <Sunburst
@@ -107,8 +82,7 @@ class BarGraph extends React.Component {
             this.props.updateHighlight(pathAsMap);
             this.setState({
               finalValue: path[path.length - 1],
-              pathValue: path.join(' > '),
-              // data: updateData(decoratedData, pathAsMap)
+              pathValue: path.join(' > ')
             });
           }}
           onValueMouseOut={() => {
@@ -118,8 +92,7 @@ class BarGraph extends React.Component {
             this.props.updateHighlight(false);
             this.setState({
               pathValue: false,
-              finalValue: false,
-              // data: updateData(decoratedData, false)
+              finalValue: false
             });
 
           }}
