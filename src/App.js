@@ -4,32 +4,75 @@ import Nav from 'react-bootstrap/Nav'
 import './App.scss';
 import BarGraph from './components/charts/BarGraph/BarGraph';
 import AmountInput from './components/AmountInput/AmountInput';
-import Table from './components/Table/Table';
+import AproxMonthlyTable from './components/AproxMonthlyTable/AproxMonthlyTable';
+import MonthlyPercentTable from './components/MonthlyPercentTable/MonthlyPercentTable';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import { LinkContainer } from 'react-router-bootstrap'
 
 
 function App() {
   return (
-    <Container fluid>
-      <Row>
-        <Navbar bg="dark" variant="dark">
-          <Container fluid>
-            <Navbar.Brand href="#home">Monthly Planner</Navbar.Brand>
-            <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#features">Features</Nav.Link>
-              <Nav.Link href="#pricing">Pricing</Nav.Link>
-            </Nav>
-          </Container>
-        </Navbar>
-      </Row>
-      <Row>
-        <AmountInput />
-      </Row>
-      <Row>
-        <Col lg={6} ><Table /></Col>
-        <Col lg={6} ><BarGraph /></Col>
-      </Row>
-    </Container>
+    <Router>
+      <Container fluid>
+        <Row>
+          <Navbar bg="dark" variant="dark">
+            <Container fluid>
+              <Navbar.Brand >Monthly Planner</Navbar.Brand>
+              <Nav className="me-auto">
+                <LinkContainer to="/">
+                  <Nav.Link>Amount</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/percent">
+                  <Nav.Link>Percentage</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/about">
+                  <Nav.Link>About</Nav.Link>
+                </LinkContainer>
+              </Nav>
+            </Container>
+          </Navbar>
+        </Row>
+        <Row>
+          <Switch>
+            <Route path="/percent">
+              <Row>
+                <AmountInput />
+              </Row>
+              <Row>
+                <Col lg={6} ><MonthlyPercentTable /></Col>
+                <Col lg={6} ><BarGraph /></Col>
+              </Row>
+
+            </Route>
+            <Route path="/about">
+              <Row>
+                <Col>
+                  <h3>
+                    Its about time I did something !
+                  </h3>
+                </Col>
+
+              </Row>
+
+            </Route>
+            <Route path="/">
+              <Row>
+                <AmountInput />
+              </Row>
+              <Row>
+                <Col lg={6} ><AproxMonthlyTable /></Col>
+                <Col lg={6} ><BarGraph /></Col>
+              </Row>
+            </Route>
+          </Switch>
+        </Row>
+
+      </Container>
+    </Router>
   );
 }
 

@@ -56,7 +56,7 @@ class BarGraph extends React.Component {
   state = {
     pathValue: false,
     // data: decoratedData,
-    finalValue: 'SUNBURST',
+    finalValue: 'Expenses',
     clicked: false
   };
 

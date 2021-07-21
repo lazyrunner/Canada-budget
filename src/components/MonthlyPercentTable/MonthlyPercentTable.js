@@ -1,11 +1,11 @@
 import './table.scss';
-import { ProgressBar, Form } from 'react-bootstrap';
+import { ProgressBar, Form,InputGroup, FormControl, } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from "../../state/index"
 // import decoratedData from '../charts/BarGraph/data';
 
-export default function Table() {
+export default function MonthlyPercentTable() {
     const { monthlyExpense, salary } = useSelector((state) => state);
     const dispatch = useDispatch();
     const { updateChild } = bindActionCreators(actionCreators, dispatch);
@@ -26,16 +26,16 @@ export default function Table() {
                                             <tr>
                                                 <th scope="col">Group</th>
                                                 <th scope="col">Item</th>
-                                                <th scope="col">Budget</th>
                                                 <th scope="col">Percent</th>
+                                                <th scope="col">Budget</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {data.children.map(parent => {
-                                                if(data.clicked && data.parent && data.parent !== parent.name)
+                                                if (data.clicked && data.parent && data.parent !== parent.name)
                                                     return null;
                                                 return parent.children.map(child => {
-                                                    if(data.clicked && data.parent && data.parent === parent.name && data.child && data.child !== child.name)
+                                                    if (data.clicked && data.parent && data.parent === parent.name && data.child && data.child !== child.name)
                                                         return null;
                                                     return (<tr>
                                                         <td>
@@ -52,33 +52,22 @@ export default function Table() {
                                                             </div>
                                                         </th>
                                                         <td>
-                                                            <Form.Control size="sm" type="number" placeholder="Amount" value={child.value} onChange={(e) => { updateChild({ parent: parent.name, child: child.name, value: e.target.value }) }} />
-                                                        </td>
-                                                        <td>
                                                             <div className="d-flex align-items-center">
-                                                                <span className="mr-2">{(child.value / monthlyExpense.total * 100).toFixed(2)}%</span>
                                                                 <div>
-                                                                    <ProgressBar className="mt-3">
-                                                                        <ProgressBar variant="success" now={(child.value / monthlyExpense.total * 100).toFixed(2)} key={1} />
-                                                                    </ProgressBar>
+                                                                    <InputGroup size="sm">
+                                                                        <InputGroup.Text id="inputGroup-sizing-sm">%</InputGroup.Text>
+                                                                        <FormControl type="number" aria-label="small" placeholder="Percent" value={child.percent} onChange={(e) => { updateChild({ parent: parent.name, child: child.name, percent: e.target.value }) }} />
+                                                                    </InputGroup>
+                                                        
                                                                 </div>
                                                             </div>
+                                                        </td>
+                                                        <td>
+                                                            $ {(child.percent/100 * (salary.afterTax/12)).toFixed(2)}
                                                         </td>
                                                     </tr>)
                                                 })
                                             })}
-                                            <tr className="table-dark">
-                                                <td>
-                                                </td>
-                                                <th scope="row">
-                                                    Total
-                                                </th>
-                                                <td>
-                                                    {monthlyExpense.total}
-                                                </td>
-                                                <td>
-                                                </td>
-                                            </tr>
                                             <tr className="table-success">
                                                 <td>
                                                 </td>
@@ -90,20 +79,14 @@ export default function Table() {
                                                     </div>
                                                 </th>
                                                 <td>
-                                                    {(salary.afterTax / 12 - monthlyExpense.total).toFixed(2)}
-                                                </td>
-                                                <td>
                                                     <div className="d-flex align-items-center">
-                                                        <span className="mr-2">{(((salary.afterTax/12-monthlyExpense.total)/(salary.afterTax/12))*100).toFixed(2)}%</span>
-                                                        <div>
-                                                            <ProgressBar className="mt-3">
-                                                                <ProgressBar variant="success" now={((salary.afterTax/12-monthlyExpense.total)/(salary.afterTax/12))*100} key={1} />
-                                                            </ProgressBar>
-                                                        </div>
+                                                        <span className="mr-2">{(monthlyExpense.savedPercent).toFixed(2)}%</span>
                                                     </div>
                                                 </td>
+                                                <td>
+                                                    $ {(monthlyExpense.savedPercent/100 * salary.afterTax / 12).toFixed(2)}
+                                                </td>
                                             </tr>
-
                                         </tbody>
                                     </table>
                                 </div>

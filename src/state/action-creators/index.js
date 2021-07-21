@@ -18,10 +18,18 @@ export const withdrawMoney = (amount) => {
 
 export const updateChild = (data) => {
     return (dispatch) => {
-        dispatch({
-            type:"updateChild",
-            payload: data
-        })
+        if(data.value){
+            dispatch({
+                type:"updateChildValue",
+                payload: data
+            })
+        }
+        if(data.percent){
+            dispatch({
+                type:"updateChildPercent",
+                payload: data
+            })
+        }
     }    
 }
 

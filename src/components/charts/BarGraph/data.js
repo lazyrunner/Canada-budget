@@ -3,110 +3,151 @@ export default {
     "children": [
         {
             name: "Home",
-            "hex": "#2dce89",
+            "hex": "#042A2B",
             children: [{
                 name: "Rent",
-                "hex": "#2dce00",
-                value: 2000
+                "hex": "#074648",
+                value: 1600,
+                percent: 33,
             },
             {
                 name:"Electricty, gas and water",
-                "hex": "#2dce30",
-                value: 100
+                "hex": "#0A6467",
+                value: 100,
+                percent: 3
             },
             {
                 name:"Phone",
-                "hex": "#2dce60",
-                value: 70
+                "hex": "#0C8185",
+                value: 75,
+                percent: 1.5
             },
             {
                 name:"Insurance",
-                "hex": "#2dce90",
-                value: 25
+                "hex": "#0F9EA3",
+                value: 25,
+                percent: 0.5
             },
             {
                 name:"Internet & TV",
-                "hex": "#2dcf00",
-                value: 85
+                "hex": "#12BCC2",
+                value: 85,
+                percent: 1.75
             },
             {
                 name:"Laundry",
-                "hex": "#2dcf30",
-                value: 50
+                "hex": "#15D9E0",
+                value: 50,
+                percent: 0.75
             },
             {
                 name:"Parking",
-                "hex": "#2dcf60",
-                value: 50
+                "hex": "#2BE5EB",
+                value: 50,
+                percent: 1
             }
 
             ]
         },
         {
             name: "Food",
-            "hex": "#0d6efd",
+            "hex": "#8CC7D1",
             children: [{
                 name: "Grocery",
-                value: 300,
-                "hex": "#0d6efd",
+                value: 280,
+                "hex": "#6AB6C4",
+                percent: 8
             },
             {
                 name:"Resturant",
                 value: 200,
-                "hex": "#0d6efd",
+                "hex": "#AFD8DF",
+                percent: 2
             }
             ]
         },
         {
             name: "Transport",
-            "hex": "#6c757d",
+            "hex": "#CDEDF6",
             children: [{
                 name: "Car",
                 value: 400,
-                "hex": "#6c757d",
+                "hex": "#D3EFF7",
+                percent: 8
             },
             {
                 name:"Car Insurance",
                 value: 325,
-                "hex": "#6c757d",
+                "hex": "#E1F4FA",
+                percent: 6.5
             },
             {
                 name:"Gas & Maintaince",
                 value: 110,
-                "hex": "#6c757d",
+                "hex": "#F0FAFC",
+                percent: 2.25
             }
             ]
         },{
-            name: "Others",
-            "hex": "#ffc107",
-            children: [{
-                name: "Movie",
-                value: 30,
-                "hex": "#ffc107",
-            },
+            name: "Entertainment",
+            "hex": "#EF7B45",
+            children: [
             {
                 name:"Booze",
-                value: 60,
-                "hex": "#ffc107",
-            },
-            {
-                name:"Chiken Tikka",
-                value: 20,
-                "hex": "#ffc107",
+                value: 100,
+                "hex": "#F18D5E",
+                percent: 2
             },
             {
                 name:"Hair Cut",
                 value: 50,
-                "hex": "#ffc107",
+                "hex": "#F3A079",
+                percent: 1
+            },
+            {
+                name: "Movie",
+                value: 30,
+                "hex": "#F6B394",
+                percent: 0.5
+            },
+            {
+                name:"Chiken Tikka",
+                value: 20,
+                "hex": "#F8C6AF",
+                percent: 0.5
+            }
+            ]
+        },{
+            name: "Planning",
+            "hex": "#D84727",
+            children: [{
+                name: "Parents",
+                value: 675,
+                "hex": "#E06F56",
+                percent: 13
+            },
+            {
+                name:"Travel",
+                value: 250,
+                "hex": "#E68974",
+                percent: 5
+            },
+            {
+                name:"Stock",
+                value: 250,
+                "hex": "#EEB0A3",
+                percent: 5,
             }
             ]
         }
     ],
     "style": {
         "fill": "#223F9A",
-        "fillOpacity": 1
+        "fillOpacity": 1,
+             
     },
-    total:3875,
+    total:4680,
+    savedPercent:4.75,
     clicked: false,
     parent:null,
     child:null
