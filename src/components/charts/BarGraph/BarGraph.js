@@ -1,10 +1,10 @@
-import { Sunburst, LabelSeries } from 'react-vis';
+import { Sunburst, LabelSeries, makeVisFlexible } from 'react-vis';
 import React from 'react';
 import { connect, } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from "../../../state/index"
 
-
+const FlexibleChart = makeVisFlexible(Sunburst);
 
 export const EXTENDED_DISCRETE_COLOR_RANGE = [
   '#19CDD7',
@@ -35,11 +35,6 @@ const LABEL_STYLE = {
   textAnchor: 'middle'
 };
 
-/**
- * Recursively work backwards from highlighted node to find path of valud nodes
- * @param {Object} node - the current node being considered
- * @returns {Array} an array of strings describing the key route to the current node
- */
 function getKeyPath(node) {
   if (!node.parent) {
     return ['root'];
@@ -64,8 +59,8 @@ class BarGraph extends React.Component {
 
     const { clicked, finalValue } = this.state;
     return (
-      <div className="basic-sunburst-example-wrapper mt-3 d-flex justify-content-center">
-        <Sunburst
+      <div className="w-100 h-100 pt-3 justify-content-center">
+        <FlexibleChart
           showLabel="true"
           animation
           className="basic-sunburst-example"
@@ -106,23 +101,22 @@ class BarGraph extends React.Component {
           }}
           style={{
             stroke: '#ddd',
-            strokeOpacity: 0.3,
-            strokeWidth: '0.5'
+            strokeOpacity: '0.2',
+            strokeWidth: '5'
           }}
           colorType="literal"
           getSize={d => d.value}
           getColor={d => d.hex}
           // getLabel={d => d.name}
           data={this.props.monthlyExpense}
-          height={500}
-          width={500}
+          
         >
           {finalValue && (
             <LabelSeries
               data={[{ x: 0, y: 0, label: finalValue, style: LABEL_STYLE }]}
             />
           )}
-        </Sunburst>
+        </FlexibleChart>
 
       </div>
     );

@@ -1,9 +1,9 @@
 const intitalState = {
-    yearly: 75000,
-    hourly: 37.80,
+    yearly: 80000,
+    hourly: 40.32,
     workDays:248,
     tax: 26,
-    afterTax:55500
+    afterTax:59200
 } 
 const reducer = (state = intitalState, action) => {
     let newState = {...state};
