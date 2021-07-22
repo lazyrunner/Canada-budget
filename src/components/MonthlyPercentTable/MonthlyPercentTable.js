@@ -1,5 +1,5 @@
 import './table.scss';
-import { ProgressBar, Form,InputGroup, FormControl, } from 'react-bootstrap';
+import { InputGroup, FormControl, } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from "../../state/index"
